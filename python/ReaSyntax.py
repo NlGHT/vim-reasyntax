@@ -16,8 +16,9 @@ def extract_code_segments(html_content, language):
     # Find all matches
     div_matches = re.findall(div_regex, html_content)
 
-    cleaning_regex = r'<i>|</i>'
-    div_matches = [re.sub(cleaning_regex, '', i) for i in div_matches]
+    cleaning_i_regex = r'<i>|</i>'
+    div_matches = [re.sub(cleaning_i_regex, '', i) for i in div_matches]
+    div_matches = [re.sub(r'\"', '\'', i) for i in div_matches]
 
     return div_matches
 
