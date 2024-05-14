@@ -71,7 +71,6 @@ def make_ultisnips(language):
     url = "https://www.reaper.fm/sdk/reascript/reascripthelp.html"
     html_content = get_html(url)
 
-    language = '/<div.*class=.e_func.*/g'
     language = '{}_func'.format(language)
     functions = extract_code_segments(html_content, language)
 
@@ -80,3 +79,7 @@ def make_ultisnips(language):
 
     ultisnips = reascript_to_ultisnips(functions, no_returns)
     return ultisnips
+
+#  test = make_ultisnips("l")
+#  for i in test:
+    #  print(i)
