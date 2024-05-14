@@ -13,5 +13,5 @@ These will be available to run from anywhere and will generate the corresponding
 ## Installation
 Add this to your favourite plugin manager like [vim-plug](https://github.com/junegunn/vim-plug) as such:
 ```vim
-Plug 'NlGHT/vim-eel'
+Plug 'NlGHT/vim-reasyntax'
 ```
