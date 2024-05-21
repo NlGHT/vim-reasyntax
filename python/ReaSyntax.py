@@ -1,15 +1,34 @@
-import urllib.request
 import re
+import urllib.request
+import urllib.error
+import socket
 
-def get_html(url):
-    # Fetch HTML content from the URL
-    with urllib.request.urlopen(url) as response:
-        html_content = response.read().decode('utf-8')
 
-    return html_content
+def get_html(silent):
+    url = "https://www.reaper.fm/sdk/reascript/reascripthelp.html"
+    try:
+        with urllib.request.urlopen(url, timeout=10) as response:
+            html = response.read().decode('utf-8')
+            return html
+    except urllib.error.URLError as e:
+        if silent != 1:
+            if isinstance(e.reason, socket.timeout):
+                print("ReaSyntax Error: The request timed out.")
+            elif isinstance(e.reason, socket.gaierror):
+                print("ReaSyntax Error: No internet connection.")
+            else:
+                print(f"ReaSyntax Error: Failed to reach the server. Reason: {e.reason}")
+    except urllib.error.HTTPError as e:
+        if silent != 1:
+            print(f"ReaSyntax Error: The server couldn't fulfill the request. HTTP Error Code: {e.code}")
+    except ValueError:
+        if silent != 1:
+            print("ReaSyntax Error: Invalid URL.")
+    except Exception as e:
+        if silent != 1:
+            print(f"ReaSyntax Error: An unexpected error occurred getting ReaScript API: {e}")
 
 def extract_code_segments(html_content, language):
-
     # Construct regular expression to match divs with specified class
     div_regex = r'<div class="{}">.*<code>(.*)</code>.*</div>'.format(language)
 
@@ -68,10 +87,7 @@ def reascript_to_ultisnips(functions, no_returns):
     return ultisnips_snippets
 
 
-def make_ultisnips(language):
-    url = "https://www.reaper.fm/sdk/reascript/reascripthelp.html"
-    html_content = get_html(url)
-
+def make_ultisnips_from_html(language, html_content):
     language = '{}_func'.format(language)
     functions = extract_code_segments(html_content, language)
 
@@ -80,6 +96,10 @@ def make_ultisnips(language):
 
     ultisnips = reascript_to_ultisnips(functions, no_returns)
     return ultisnips
+
+def make_ultisnips(language, silent):
+    html_content = get_html(silent)
+    make_ultisnips_from_html(language, html_content)
 
 #  test = make_ultisnips("l")
 #  for i in test:
