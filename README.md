@@ -11,7 +11,7 @@ Plug 'NlGHT/vim-reasyntax'
 ```
 **This requires [UltiSnips](https://github.com/SirVer/ultisnips) to be installed to do anything!**
 
-**You probably also want to install [YouCompleteMe](https://github.com/ycm-core/YouCompleteMe) or another library that provides autocomplete suggestions from UltiSnips for the full effect!**
+**You probably also want to install [YouCompleteMe](https://github.com/ycm-core/YouCompleteMe) or another plugin that provides autocomplete suggestions from UltiSnips for the full effect!**
 
 ## Usage
 The easiest way to use Vim-ReaSyntax is to configure it with your .vimrc with the options you want as such:
