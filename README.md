@@ -51,6 +51,12 @@ This is a large language pack that many people likely already have installed to 
 
 If you just want Lua there is also [vim-lua](https://github.com/tbastos/vim-lua) and [vim-lua-ftplugin](https://github.com/xolox/vim-lua-ftplugin).
 
+## Contributing
+All contributions are very welcome!  Thanks for taking an interest in adding to the project!  Currently there are a few small things to look out for so we can all get along nicely! :):
+- Everything in the file `python/ReaSyntax.py` should be fully self-contained to just handling the API parsing.
+- Everything in the file `plugin/ReaSyntax.vim` should handle everything related to the vim plugin specifically.
+- Prefix everything pertaining to the plugin locally with `s:` as is done with everything currently in there (such as `s:plugin_root_dir` or `s:ReaSyntaxUpdateLua()`)
+
 ## Missing Features
 - No support for the `{reaper.array}.methods()` as I'm not sure the best way to implement them yet in terms of usability and co-operating with UltiSnips.  Please let me know any suggestions you have!
 - No snippets are distributed.  This is intentional for now as it keeps things up-to-date and allows the user to disable and enable language snippets (by deleting and creating them) with their config whenever they want.  It also means people don't have to download languages they have no interest in using.  If this becomes higher demand, a method could maybe be developed.
